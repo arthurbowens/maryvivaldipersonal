@@ -1,0 +1,87 @@
+<section
+  id="inicio"
+  class="relative overflow-hidden border-b border-zinc-800 bg-zinc-950"
+  aria-labelledby="hero-heading"
+>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(244,63,94,0.22),transparent)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-rose-600/10 blur-3xl"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
+    <div>
+      <p
+        class="mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/60 px-3 py-1 text-xs font-medium uppercase tracking-wider text-rose-300"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-rose-400" aria-hidden="true"></span>
+        {{ copy.eyebrow }}
+      </p>
+      <h1
+        id="hero-heading"
+        class="text-balance text-4xl font-semibold tracking-tight text-zinc-50 sm:text-5xl lg:text-6xl"
+      >
+        {{ copy.headline }}
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-zinc-400">
+        {{ copy.subheadline }}
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a
+          class="inline-flex items-center justify-center rounded-full bg-rose-500 px-6 py-3 text-center text-sm font-semibold text-zinc-950 shadow-lg shadow-rose-900/40 transition hover:bg-rose-400"
+          href="#contato"
+          >{{ copy.primaryCta }}</a
+        >
+        <a
+          class="inline-flex items-center justify-center rounded-full border border-zinc-600 px-6 py-3 text-sm font-semibold text-zinc-200 transition hover:border-rose-400/60 hover:text-rose-200"
+          href="#servicos"
+          >{{ copy.secondaryCta }}</a
+        >
+      </div>
+      <dl class="mt-14 grid grid-cols-3 gap-6 border-t border-zinc-800 pt-10 sm:max-w-lg">
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-zinc-500">Foco</dt>
+          <dd class="mt-1 text-sm font-semibold text-zinc-100">Estratégia &amp; constância</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-zinc-500">Formato</dt>
+          <dd class="mt-1 text-sm font-semibold text-zinc-100">Presencial &amp; online</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-zinc-500">Perfil</dt>
+          <dd class="mt-1 text-sm font-semibold text-zinc-100">Todos os níveis</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="relative lg:justify-self-end">
+      <figure
+        class="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl shadow-black/50"
+      >
+        <img
+          src="/foto1.jpeg"
+          alt="Mary Vivaldi em sessão de treino"
+          class="h-full w-full object-cover object-center"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div
+          class="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,11,0.15)_35%,rgba(9,9,11,0.85)_100%)]"
+          aria-hidden="true"
+        ></div>
+        <figcaption class="absolute inset-x-0 bottom-0 p-8">
+          <p class="text-sm font-medium text-rose-300">{{ copy.panelKicker }}</p>
+          <p class="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+            {{ copy.panelTitle }}
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-zinc-200">
+            {{ copy.panelBody }}
+          </p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

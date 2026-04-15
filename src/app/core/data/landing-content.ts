@@ -92,14 +92,17 @@ export const FOOTER = {
 } as const;
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
-  { label: 'Instagram', href: 'https://instagram.com/' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/' },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/maryvivaldi?igsh=Z3dqeXJiZ282YzRm',
+  },
 ] as const;
 
-/** Substitua pelo número real em formato internacional, sem símbolos. */
-export const WHATSAPP_E164 = '5511999999999';
+/** Brasil (55) + DDD 27 + número, só dígitos. */
+export const WHATSAPP_E164 = '5527997691058';
 
 export const WHATSAPP_MESSAGE =
   'Olá, Mary! Vim pelo site e gostaria de saber mais sobre os planos de personal trainer.';
 
-export const INSTAGRAM_URL = 'https://instagram.com/';
+export const INSTAGRAM_URL =
+  'https://www.instagram.com/maryvivaldi?igsh=Z3dqeXJiZ282YzRm';

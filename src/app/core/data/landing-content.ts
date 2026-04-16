@@ -60,16 +60,16 @@ export const SERVICES: readonly ServiceItem[] = [
 ] as const;
 
 export const ABOUT = {
-  title: 'Sobre a Mary',
+  title: 'Quem sou eu?',
   paragraphs: [
-    'Minha bio resume em três pilares: obsessão vence talento, Wellness 10× e transformar corpos com estratégia — não com milagre de marketing, mas com método e constância.',
-    'Trabalho musculação, condicionamento e hábitos como um sistema: você sabe o que faz, por que faz e como avançar sem se machucar ou estagnar.',
-    'Atendo todos os níveis, do iniciante ao avançado, com comunicação direta, cobrança saudável e respeito absoluto à sua rotina.',
+    'Sou profissional da área da saúde e performance há mais de 12 anos.',
+    'Ex-dançarina, fisiculturista há 10 anos e apaixonada por transformar vidas através do treino e da constância.',
+    'Aos 38, minha missão é te ajudar a conquistar sua melhor versão com disciplina, foco e resultados reais.',
   ] as const,
   stats: [
-    { value: '10+', label: 'Anos de experiência' },
-    { value: '500+', label: 'Alunos acompanhados' },
-    { value: '100%', label: 'Compromisso com segurança' },
+    { value: '12+', label: 'Anos em saúde e performance' },
+    { value: '10 anos', label: 'Fisiculturista' },
+    { value: '10 mil+', label: 'Atendimentos realizados' },
   ] as const,
 } as const;
 

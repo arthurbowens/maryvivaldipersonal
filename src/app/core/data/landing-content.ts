@@ -1,3 +1,4 @@
+import { buildWhatsAppLink } from '../utils/whatsapp.util';
 import type { NavItem, ServiceItem, SocialLink } from '../models/landing.types';
 
 export const SITE_NAME = 'Mary Vivaldi';
@@ -17,7 +18,7 @@ export const HERO = {
   eyebrow: 'Wellness 10× · Personal trainer',
   headline: 'Obsessão vence talento.',
   subheadline:
-    'Transformo corpos com estratégia — musculação, condicionamento e hábitos alinhados ao seu objetivo, com acompanhamento presencial ou online.',
+    'Transformo corpos com estratégia: musculação, condicionamento e hábitos alinhados ao seu objetivo, com acompanhamento presencial ou online.',
   primaryCta: 'Quero começar',
   secondaryCta: 'Ver serviços',
   panelKicker: 'Wellness 10×',
@@ -29,7 +30,7 @@ export const HERO = {
 export const SERVICES_INTRO = {
   title: 'Como posso te ajudar',
   subtitle:
-    'Estratégia antes de improviso: cada protocolo respeita seu tempo, seu corpo e o padrão Wellness 10× — evolução com segurança.',
+    'Estratégia antes de improviso: cada protocolo respeita seu tempo, seu corpo e o padrão Wellness 10×, evolução com segurança.',
 } as const;
 
 export const SERVICES: readonly ServiceItem[] = [
@@ -64,7 +65,7 @@ export const ABOUT = {
   paragraphs: [
     'Sou profissional da área da saúde e performance há mais de 12 anos.',
     'Ex-dançarina, fisiculturista há 10 anos e apaixonada por transformar vidas através do treino e da constância.',
-    'Aos 38, minha missão é te ajudar a conquistar sua melhor versão com disciplina, foco e resultados reais.',
+    'Minha missão é te ajudar a conquistar sua melhor versão com disciplina, foco e resultados reais.',
   ] as const,
   stats: [
     { value: '12+', label: 'Anos em saúde e performance' },
@@ -78,6 +79,14 @@ export const TESTIMONIALS_INTRO = {
   subtitle: 'Resultados de quem colocou consistência em primeiro lugar.',
 } as const;
 
+export const RESULTS: readonly { src: string; alt: string }[] = [
+  { src: '/foto3.jpeg', alt: 'Antes e depois de alunos com evolução de massa muscular e definição' },
+  { src: '/resultado1.jpeg', alt: 'Antes e depois de aluna com redução de medidas' },
+  { src: '/resultado2.jpeg', alt: 'Antes e depois de aluna com perda de peso' },
+  { src: '/resultado3.jpeg', alt: 'Antes e depois de aluna com ganho de definição abdominal' },
+  { src: '/resultado4.jpeg', alt: 'Antes e depois de aluno com ganho de massa muscular' },
+] as const;
+
 export const CTA = {
   title: 'Pronta para o próximo passo?',
   subtitle:
@@ -88,7 +97,7 @@ export const CTA = {
 
 export const FOOTER = {
   rights: 'Todos os direitos reservados.',
-  tagline: 'Wellness 10× — obsessão vence talento. Transformo corpos com estratégia.',
+  tagline: 'Wellness 10×. Obsessão vence talento. Transformo corpos com estratégia.',
 } as const;
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
@@ -103,6 +112,12 @@ export const WHATSAPP_E164 = '5527997691058';
 
 export const WHATSAPP_MESSAGE =
   'Olá, Mary! Vim pelo site e gostaria de saber mais sobre os planos de personal trainer.';
+
+/** Número formatado para exibição. */
+export const WHATSAPP_DISPLAY = '+55 27 99769-1058';
+
+/** Link do WhatsApp com mensagem pronta, usado em todos os CTAs. */
+export const WHATSAPP_URL = buildWhatsAppLink(WHATSAPP_E164, WHATSAPP_MESSAGE);
 
 export const INSTAGRAM_URL =
   'https://www.instagram.com/maryvivaldi?igsh=Z3dqeXJiZ282YzRm';

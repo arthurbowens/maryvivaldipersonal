@@ -7,7 +7,14 @@
         © {{ year }} {{ siteName }}. {{ footer.rights }}
       </p>
     </div>
-    <nav class="flex flex-wrap gap-4" aria-label="Redes sociais">
+    <nav class="flex flex-wrap gap-4" aria-label="Contato e redes sociais">
+      <a
+        class="text-sm font-medium text-zinc-400 transition hover:text-rose-400"
+        [href]="whatsappHref"
+        target="_blank"
+        rel="noopener noreferrer"
+        >WhatsApp {{ whatsappDisplay }}</a
+      >
       @for (s of social; track s.label) {
         <a
           class="text-sm font-medium text-zinc-400 transition hover:text-rose-400"

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HERO } from '../../../../core/data/landing-content';
+import { HERO, WHATSAPP_URL } from '../../../../core/data/landing-content';
 
 @Component({
   selector: 'app-landing-hero',
@@ -8,4 +8,5 @@ import { HERO } from '../../../../core/data/landing-content';
 })
 export class LandingHeroComponent {
   readonly copy = HERO;
+  readonly whatsappHref = WHATSAPP_URL;
 }

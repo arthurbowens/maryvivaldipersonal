@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import {
   CTA,
   INSTAGRAM_URL,
-  WHATSAPP_E164,
-  WHATSAPP_MESSAGE,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
 } from '../../../../core/data/landing-content';
-import { buildWhatsAppLink } from '../../../../core/utils/whatsapp.util';
 
 @Component({
   selector: 'app-landing-cta',
@@ -14,6 +13,7 @@ import { buildWhatsAppLink } from '../../../../core/utils/whatsapp.util';
 })
 export class LandingCtaComponent {
   readonly copy = CTA;
-  readonly whatsappHref = buildWhatsAppLink(WHATSAPP_E164, WHATSAPP_MESSAGE);
+  readonly whatsappHref = WHATSAPP_URL;
+  readonly whatsappDisplay = WHATSAPP_DISPLAY;
   readonly instagramHref = INSTAGRAM_URL;
 }

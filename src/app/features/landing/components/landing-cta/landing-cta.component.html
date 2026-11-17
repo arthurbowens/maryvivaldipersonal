@@ -17,6 +17,13 @@
         </h2>
         <p class="mt-4 text-lg text-zinc-400">{{ copy.subtitle }}</p>
         <p class="mt-4 text-sm text-zinc-500">{{ copy.note }}</p>
+        <a
+          class="mt-2 inline-block text-sm font-medium text-rose-300 transition hover:text-rose-200"
+          [href]="whatsappHref"
+          target="_blank"
+          rel="noopener noreferrer"
+          >WhatsApp: {{ whatsappDisplay }}</a
+        >
       </div>
       <div class="mt-10 flex shrink-0 flex-col gap-3 sm:flex-row lg:mt-0 lg:flex-col">
         <a

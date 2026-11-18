@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AssistantComponent } from '../assistant/assistant.component';
 import { LandingAboutComponent } from './components/landing-about/landing-about.component';
 import { LandingCtaComponent } from './components/landing-cta/landing-cta.component';
 import { LandingFooterComponent } from './components/landing-footer/landing-footer.component';
@@ -18,6 +19,7 @@ import { LandingTestimonialsComponent } from './components/landing-testimonials/
     LandingTestimonialsComponent,
     LandingCtaComponent,
     LandingFooterComponent,
+    AssistantComponent,
   ],
   templateUrl: './landing.component.html',
 })

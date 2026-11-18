@@ -1,6 +1,6 @@
 <button
   type="button"
-  class="fixed bottom-5 right-5 z-40 flex items-center gap-3 rounded-full border border-rose-400/40 bg-zinc-950/90 py-2 pl-2 pr-2 text-sm font-semibold text-zinc-100 shadow-xl shadow-black/50 backdrop-blur transition hover:border-rose-400 hover:bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 sm:pr-5"
+  class="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40 flex items-center gap-3 rounded-full border border-rose-400/40 bg-zinc-950/90 py-2 pl-2 pr-2 text-sm font-semibold text-zinc-100 shadow-xl shadow-black/50 backdrop-blur transition hover:border-rose-400 hover:bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 sm:pr-5"
   aria-label="Abrir assistente da Mary Vivaldi"
   (click)="openAssistant()"
 >
@@ -22,12 +22,14 @@
 
 @if (open()) {
   <div
-    class="fixed inset-0 z-[80] grid place-items-end bg-black/70 backdrop-blur-sm sm:place-items-center sm:p-4"
+    class="fixed inset-x-0 top-0 z-[80] grid h-dvh place-items-stretch overscroll-contain bg-black/70 backdrop-blur-sm sm:place-items-center sm:p-4"
+    [style.height.px]="viewportHeight()"
+    [style.transform]="'translateY(' + viewportTop() + 'px)'"
     role="presentation"
     (click)="close()"
   >
     <div
-      class="grid h-[88dvh] w-full max-w-lg grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-t-3xl border border-zinc-800 border-t-rose-500 bg-zinc-950 shadow-2xl shadow-black/60 sm:h-[640px] sm:rounded-3xl"
+      class="grid h-full w-full grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden bg-zinc-950 shadow-2xl shadow-black/60 sm:h-[640px] sm:max-h-full sm:max-w-lg sm:rounded-3xl sm:border sm:border-zinc-800 sm:border-t-rose-500"
       role="dialog"
       aria-modal="true"
       aria-labelledby="assistant-title"
@@ -36,7 +38,7 @@
       (keydown.escape)="close()"
     >
       <div
-        class="flex items-center gap-3 border-b border-zinc-800 bg-gradient-to-br from-rose-500/10 to-transparent px-4 py-3"
+        class="flex items-center gap-3 border-b border-zinc-800 bg-gradient-to-br from-rose-500/10 to-transparent px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-3"
       >
         <img
           src="/foto1.jpeg"
@@ -52,14 +54,14 @@
           <p class="truncate text-xs text-zinc-400">Anamnese com a Mary</p>
         </div>
         <span
-          class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-300"
+          class="hidden items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-300 min-[380px]:inline-flex"
         >
           <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>
           Online
         </span>
         <button
           type="button"
-          class="inline-flex h-9 w-9 items-center justify-center rounded-full text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
+          class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
           aria-label="Fechar assistente"
           (click)="close()"
         >
@@ -69,11 +71,16 @@
         </button>
       </div>
 
-      <div #chatFeed class="space-y-3 overflow-y-auto px-4 py-5" role="log" aria-live="polite">
+      <div
+        #chatFeed
+        class="space-y-3 overflow-y-auto overscroll-contain scroll-smooth px-4 py-4 sm:py-5"
+        role="log"
+        aria-live="polite"
+      >
         @for (m of messages(); track m.id) {
           <div class="flex" [class.justify-end]="m.role === 'user'">
             <div
-              class="max-w-[85%] whitespace-pre-line rounded-2xl px-4 py-2.5 text-sm leading-relaxed"
+              class="max-w-[88%] whitespace-pre-line break-words rounded-2xl px-4 py-2.5 text-sm leading-relaxed"
               [class.rounded-bl-md]="m.role === 'bot'"
               [class.bg-zinc-800]="m.role === 'bot'"
               [class.text-zinc-100]="m.role === 'bot'"
@@ -89,13 +96,25 @@
       </div>
 
       @if (started() && !finished()) {
-        <div class="border-t border-zinc-800 bg-zinc-900/60 p-4">
+        <div
+          class="border-t border-zinc-800 bg-zinc-900 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-4"
+        >
+          <div
+            class="-mx-4 mb-3 -mt-3 h-1 bg-zinc-800"
+            role="progressbar"
+            aria-label="Progresso da anamnese"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-valuenow]="progress()"
+          >
+            <div class="h-full bg-rose-500 transition-all duration-300" [style.width.%]="progress()"></div>
+          </div>
           @if (currentStep().options; as opts) {
-            <div class="mb-3 flex flex-wrap gap-2">
+            <div class="mb-3 flex max-h-[34dvh] flex-wrap gap-2 overflow-y-auto overscroll-contain">
               @for (o of opts; track o) {
                 <button
                   type="button"
-                  class="rounded-full border border-zinc-700 px-3.5 py-2 text-sm text-zinc-200 transition hover:border-rose-400 hover:bg-rose-500/10 hover:text-rose-200"
+                  class="min-h-11 rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-200 active:bg-rose-500/20 transition hover:border-rose-400 hover:bg-rose-500/10 hover:text-rose-200"
                   (click)="pickOption(o)"
                 >
                   {{ o }}
@@ -107,7 +126,7 @@
             <form class="flex gap-2" (submit)="$event.preventDefault(); submitAnswer()">
               <input
                 #composerInput
-                class="min-w-0 flex-1 rounded-full border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-rose-400 focus:outline-none"
+                class="min-h-11 min-w-0 flex-1 rounded-full border border-zinc-700 bg-zinc-950 px-4 py-3 text-base text-zinc-100 sm:text-sm placeholder:text-zinc-500 focus:border-rose-400 focus:outline-none"
                 autocomplete="off"
                 [type]="currentStep().inputType"
                 [attr.inputmode]="currentStep().inputType === 'number' ? 'decimal' : 'text'"
@@ -118,7 +137,7 @@
               />
               <button
                 type="submit"
-                class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-rose-500 text-zinc-950 transition hover:bg-rose-400"
+                class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-rose-500 text-zinc-950 transition hover:bg-rose-400 sm:h-11 sm:w-11"
                 aria-label="Enviar resposta"
               >
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -130,15 +149,17 @@
           @if (error()) {
             <p class="mt-2 text-xs text-rose-300" role="alert">{{ error() }}</p>
           }
-          <p class="mt-3 text-center text-xs text-zinc-500">
+          <p class="mt-2 text-center text-xs text-zinc-500">
             Pergunta {{ stepIndex() + 1 }} de {{ steps.length }}
           </p>
         </div>
       }
       @if (finished()) {
-        <div class="flex flex-col gap-2 border-t border-zinc-800 bg-zinc-900/60 p-4 sm:flex-row">
+        <div
+          class="flex flex-col gap-2 border-t border-zinc-800 bg-zinc-900 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:flex-row"
+        >
           <a
-            class="inline-flex flex-1 items-center justify-center rounded-full bg-rose-500 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-rose-400"
+            class="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-rose-500 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-rose-400"
             [href]="whatsappHref()"
             target="_blank"
             rel="noopener noreferrer"
@@ -146,7 +167,7 @@
           >
           <button
             type="button"
-            class="inline-flex flex-1 items-center justify-center rounded-full border border-zinc-600 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:border-rose-400/60"
+            class="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-zinc-600 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:border-rose-400/60"
             (click)="restart()"
           >
             Refazer anamnese

@@ -42,7 +42,11 @@ export class AssistantComponent {
   protected readonly error = signal('');
   protected readonly messages = signal<readonly ChatMessage[]>([]);
   protected readonly whatsappHref = signal('');
+  /** Altura/posição visíveis (descontando o teclado virtual); null = usar 100dvh. */
+  protected readonly viewportHeight = signal<number | null>(null);
+  protected readonly viewportTop = signal(0);
   private answers: Partial<Record<AssistantStepKey, string>> = {};
+  private readonly onViewportChange = (): void => this.syncViewport();
 
   protected currentStep(): AssistantStep {
     return this.steps[this.stepIndex()];
@@ -56,6 +60,11 @@ export class AssistantComponent {
   protected openAssistant(): void {
     this.open.set(true);
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    const vv = window.visualViewport;
+    vv?.addEventListener('resize', this.onViewportChange);
+    vv?.addEventListener('scroll', this.onViewportChange);
+    this.syncViewport();
     if (!this.started() || this.finished()) this.begin();
     else {
       this.scrollFeed();
@@ -66,6 +75,24 @@ export class AssistantComponent {
   protected close(): void {
     this.open.set(false);
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    const vv = window.visualViewport;
+    vv?.removeEventListener('resize', this.onViewportChange);
+    vv?.removeEventListener('scroll', this.onViewportChange);
+    this.viewportHeight.set(null);
+    this.viewportTop.set(0);
+  }
+
+  private syncViewport(): void {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    this.viewportHeight.set(Math.round(vv.height));
+    this.viewportTop.set(Math.round(vv.offsetTop));
+    this.scrollFeed();
+  }
+
+  protected progress(): number {
+    return Math.round((this.stepIndex() / this.steps.length) * 100);
   }
 
   protected restart(): void {
